@@ -3,7 +3,7 @@ import 'intersection-observer'
 const options = {
     root: null, // 타겟의 가시성 검사를 위해 뷰포트 대신 사용할 요소를 지정
     rootMargin: "0px",
-    threshold: 0.25 // 타겟의 기사성이 25%일 때 옵저버 실행, [0, 0.3, 1] 타겟의 가시성이 0%, 30%, 100%일 때 옵저버 실행
+    threshold: 0.5 // 타겟의 기사성이 25%일 때 옵저버 실행, [0, 0.3, 1] 타겟의 가시성이 0%, 30%, 100%일 때 옵저버 실행
 }
 const io = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -16,6 +16,7 @@ const io = new IntersectionObserver((entries, observer) => {
         // entry.time 변경이 발생한 시간 정보
 
         if (entry.isIntersecting) {
+            entry.target.src = entry.target.dataset.src
             observer.unobserve(entry.target)
         }
     })
